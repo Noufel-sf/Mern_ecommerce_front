@@ -10,6 +10,8 @@ export default function LoginPage() {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({}); // Clear previous errors
@@ -32,7 +34,7 @@ export default function LoginPage() {
     try {
       // Send request to the correct API endpoint with credentials
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/admin/login`, 
+        `${apiUrl}/api/admin/login`, 
         { adminName, password },
         { withCredentials: true } // Important: include credentials for session
       );

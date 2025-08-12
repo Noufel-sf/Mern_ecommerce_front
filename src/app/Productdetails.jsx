@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FaStar } from 'react-icons/fa';
 import { useCart } from './CartContext';
-import process from 'process';
 
 function Productdetails() {
+  const apiUrl = import.meta.env.VITE_API_URL; // Use the environment variable for API URL
   const [product, setProduct] = useState({});
   const [selectedImage, setSelectedImage] = useState("");
   const { addToCart } = useCart();
@@ -16,7 +16,7 @@ function Productdetails() {
   // getting the products with their id from the db
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/api/products/${id}`)
+    axios.get(`${apiUrl}/api/products/${id}`)
     .then((res) => {
       setProduct(res.data);
       setSelectedImage(res.data.images?.coverimg.url); // default image

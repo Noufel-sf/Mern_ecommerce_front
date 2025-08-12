@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
-import process from "process";
 
 
 
@@ -9,12 +8,13 @@ import process from "process";
 export default function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
         console.log('ProtectedRoute: Checking authentication...');
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/admin/check`, { 
+        const response = await axios.get(`${apiUrl}/api/admin/check`, { 
           withCredentials: true 
         });
         console.log('ProtectedRoute: Auth response:', response.data);

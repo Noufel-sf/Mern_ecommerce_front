@@ -5,17 +5,18 @@ import Services from "./Services";
 import Banner from "./Banner";
 import { Link } from "react-router-dom";
 import { useCart } from "../CartContext";
-import process from "process";
+
 import axios from "axios";
 
 function Hero() {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const { addToCart } = useCart();
   const [Productlist, setProductlist] = useState([]);
 
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/products/heroproducts`
+        `${apiUrl}/api/products/heroproducts`
       );
       console.log("the 4 products ", response.data);
       setProductlist(response.data);

@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 
 
+// api url 
+
 import ProductsContent from "./ProductsContent";
 import OrdersContent from "./OrdersContent";
 import SettingsContent from "./SettingsContent";
@@ -24,6 +26,8 @@ import AddProductContent from "./AddProductContent";
 import UpdateProductdialog from "./UpdateProductdialog";
 
 const Admin = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const cloudinary_url = import.meta.env.VITE_CLOUDINARY_URL;
   // states
   const [activeTab, setActiveTab] = useState("Dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -95,7 +99,7 @@ const Admin = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/products`,
+        `${apiUrl}/api/products`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -113,7 +117,7 @@ const Admin = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/products`);
+      const response = await axios.get(`${apiUrl}/api/products`);
       setProducts(response.data);
     } catch (error) {
       console.error("Failed to fetch products", error);
@@ -137,7 +141,7 @@ const Updateproduct = async (item) => {
         formData.append("cloud_name", "dmjez15fo"); // Replace with your Cloudinary name
 
         const res = await axios.post(
-          `${process.env.cloudinary_URL}`,
+          `${cloudinary_url}`,
           formData
         );
 
@@ -153,7 +157,7 @@ const Updateproduct = async (item) => {
 
     // Send to backend
     const response = await axios.put(
-      `${process.env.REACT_APP_API_URL}/api/products/${item._id}`,
+      `${apiUrl}/api/products/${item._id}`,
       finalProduct
     );
 
@@ -188,7 +192,7 @@ const Updateproduct = async (item) => {
   const DeleteProduct = async () => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/products/${selectedProduct._id}`
+        `${apiUrl}/api/products/${selectedProduct._id}`
       );
       setProducts(
         Products.filter((product) => product._id !== selectedProduct._id)
@@ -231,7 +235,7 @@ const Updateproduct = async (item) => {
     // Check if user exists and has a token before making the request
 
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/order`, {});
+      const response = await axios.get(`${apiUrl}/api/order`, {});
 
       setOrders(response.data);
       console.log("Fetched orders:", response.data);
@@ -252,7 +256,7 @@ const Updateproduct = async (item) => {
     console.log("Handling order result for:", order);
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/order/confirm/${order._id}`
+        `${apiUrl}/api/order/confirm/${order._id}`
       );
 
       console.log("Order confirmed:", response.data);
@@ -271,7 +275,7 @@ const Updateproduct = async (item) => {
   const deleteOrder = async (orderId) => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/order/delete/${orderId}`
+        `${apiUrl}/api/order/delete/${orderId}`
       );
       setOrders(Orders.filter((order) => order._id !== selectedOrder._id));
       console.log(response.data.message);
@@ -283,7 +287,7 @@ const Updateproduct = async (item) => {
 
   const fetchRevenue = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/revenue`);
+      const res = await axios.get(`${apiUrl}/api/revenue`);
       console.log("Fetched revenue:", res.data.total);
       setRevenue(res.data.total);
     } catch (err) {
@@ -297,7 +301,7 @@ const Updateproduct = async (item) => {
 // logout the admin user
 const handleLogout = async () => {
   try {
-    await axios.post(`${process.env.REACT_APP_API_URL}/api/admin/logout`, {}, { withCredentials: true });
+    await axios.post(`${apiUrl}/api/admin/logout`, {}, { withCredentials: true });
     alert("Logged out successfully");
     window.location.href = "/login"; // Redirect to login page
   } catch (error) {

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import process from "process";
 
 export default function OrderInfo() {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -33,7 +34,7 @@ export default function OrderInfo() {
   };
  
   const saveOrderToDB = async () => {
-    
+
     const orderData = {
       username: formData.name,
       surname: formData.surname,
@@ -52,7 +53,7 @@ export default function OrderInfo() {
 
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/order/submitorder`,
+        `${apiUrl}/api/order/submitorder`,
         orderData,
         {
           headers: {
