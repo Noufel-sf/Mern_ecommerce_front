@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import process from "process";
 
 import {
   Users,
@@ -94,7 +95,7 @@ const Admin = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/products",
+        `${process.env.REACT_APP_API_URL}/api/products`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -112,7 +113,7 @@ const Admin = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/products");
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/products`);
       setProducts(response.data);
     } catch (error) {
       console.error("Failed to fetch products", error);
@@ -121,7 +122,6 @@ const Admin = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-
 
   // update product functions
 const Updateproduct = async (item) => {
@@ -137,7 +137,7 @@ const Updateproduct = async (item) => {
         formData.append("cloud_name", "dmjez15fo"); // Replace with your Cloudinary name
 
         const res = await axios.post(
-          `https://api.cloudinary.com/v1_1/dmjez15fo/image/upload`,
+          `${process.env.cloudinary_URL}`,
           formData
         );
 
@@ -153,7 +153,7 @@ const Updateproduct = async (item) => {
 
     // Send to backend
     const response = await axios.put(
-      `http://localhost:5000/api/products/${item._id}`,
+      `${process.env.REACT_APP_API_URL}/api/products/${item._id}`,
       finalProduct
     );
 
@@ -188,7 +188,7 @@ const Updateproduct = async (item) => {
   const DeleteProduct = async () => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/products/${selectedProduct._id}`
+        `${process.env.REACT_APP_API_URL}/api/products/${selectedProduct._id}`
       );
       setProducts(
         Products.filter((product) => product._id !== selectedProduct._id)
@@ -231,7 +231,7 @@ const Updateproduct = async (item) => {
     // Check if user exists and has a token before making the request
 
     try {
-      const response = await axios.get("http://localhost:5000/api/order", {});
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/order`, {});
 
       setOrders(response.data);
       console.log("Fetched orders:", response.data);
@@ -252,7 +252,7 @@ const Updateproduct = async (item) => {
     console.log("Handling order result for:", order);
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/order/confirm/${order._id}`
+        `${process.env.REACT_APP_API_URL}/api/order/confirm/${order._id}`
       );
 
       console.log("Order confirmed:", response.data);
@@ -271,7 +271,7 @@ const Updateproduct = async (item) => {
   const deleteOrder = async (orderId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/order/delete/${orderId}`
+        `${process.env.REACT_APP_API_URL}/api/order/delete/${orderId}`
       );
       setOrders(Orders.filter((order) => order._id !== selectedOrder._id));
       console.log(response.data.message);
@@ -283,7 +283,7 @@ const Updateproduct = async (item) => {
 
   const fetchRevenue = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/revenue");
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/revenue`);
       console.log("Fetched revenue:", res.data.total);
       setRevenue(res.data.total);
     } catch (err) {
@@ -297,7 +297,7 @@ const Updateproduct = async (item) => {
 // logout the admin user
 const handleLogout = async () => {
   try {
-    await axios.post("http://localhost:5000/api/admin/logout", {}, { withCredentials: true });
+    await axios.post(`${process.env.REACT_APP_API_URL}/api/admin/logout`, {}, { withCredentials: true });
     alert("Logged out successfully");
     window.location.href = "/login"; // Redirect to login page
   } catch (error) {

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FaStar } from 'react-icons/fa';
 import { useCart } from './CartContext';
+import process from 'process';
 
 function Productdetails() {
   const [product, setProduct] = useState({});
@@ -15,7 +16,7 @@ function Productdetails() {
   // getting the products with their id from the db
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/products/${id}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/products/${id}`)
     .then((res) => {
       setProduct(res.data);
       setSelectedImage(res.data.images?.coverimg.url); // default image

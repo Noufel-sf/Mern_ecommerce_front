@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCart } from "./CartContext";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import process from "process";
 
 export default function OrderInfo() {
   const [formData, setFormData] = useState({
@@ -32,6 +33,7 @@ export default function OrderInfo() {
   };
  
   const saveOrderToDB = async () => {
+    
     const orderData = {
       username: formData.name,
       surname: formData.surname,
@@ -50,7 +52,7 @@ export default function OrderInfo() {
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/order/submitorder`,
+        `${process.env.REACT_APP_API_URL}/api/order/submitorder`,
         orderData,
         {
           headers: {

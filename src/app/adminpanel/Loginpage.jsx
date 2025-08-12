@@ -1,6 +1,7 @@
 
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
+import process from "process";
 import axios from 'axios';
 
 export default function LoginPage() {
@@ -31,7 +32,7 @@ export default function LoginPage() {
     try {
       // Send request to the correct API endpoint with credentials
       const response = await axios.post(
-        'http://localhost:5000/api/admin/login', 
+        `${process.env.REACT_APP_API_URL}/api/admin/login`, 
         { adminName, password },
         { withCredentials: true } // Important: include credentials for session
       );

@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+import process from "process";
+
+
+
 
 export default function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);
@@ -10,7 +14,7 @@ export default function ProtectedRoute({ children }) {
     const checkAuth = async () => {
       try {
         console.log('ProtectedRoute: Checking authentication...');
-        const response = await axios.get("http://localhost:5000/api/admin/check", { 
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/admin/check`, { 
           withCredentials: true 
         });
         console.log('ProtectedRoute: Auth response:', response.data);

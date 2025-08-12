@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Product from './Product';
 import Services from '../Homepage/Services';
+import process from 'process';
 
 const categories = ['all', 'Phone', 'Earphone', 'Charger'];
 
@@ -11,7 +12,7 @@ function Products() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/products');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/products`);
       setProductlist(response.data);
     } catch (error) {
       console.error('Failed to fetch products', error);
