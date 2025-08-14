@@ -52,9 +52,9 @@ function Navbarr() {
             <Link
               to="/cart"
               onClick={() => setOpen(false)}
-              className="relative text-[var(--secondary-color)] hover:text-[var(--primary-color)] text-2xl"
+              className="text-[var(--secondary-color)] hover:text-[var(--primary-color)] text-2xl"
             >
-              <FaBagShopping />
+              <FaBagShopping className="relative" />
               {cartItemCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-[var(--primary-color)] text-white rounded-full px-2 text-xs">
                   {cartItemCount}

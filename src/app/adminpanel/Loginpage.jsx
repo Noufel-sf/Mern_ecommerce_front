@@ -42,7 +42,6 @@ export default function LoginPage() {
       console.log('Login successful', response.data);
       
       if (response.data.isAdmin) {
-
         // Redirect to admin panel (your route is /dashboard)
         navigate('/dashboard');
       }

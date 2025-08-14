@@ -53,10 +53,10 @@ function Hero() {
               enhance your lifestyle.
             </p>
             <div className="flex gap-4 mt-8">
-              <button className="bg-[var(--primary-color)] hover:bg-[var(--secondary-color)] cursor-pointer text-white py-3 px-8 rounded-full font-semibold transition duration-300 text-[12px] md:text-xl">
+              <button className="bg-[var(--primary-color)] hover:bg-[var(--secondary-color)] cursor-pointer text-white py-2 px-5 rounded-full font-semibold transition duration-300 text-[12px] md:text-xl">
                 Shop Now
               </button>
-              <button className="border border-white cursor-pointer text-black bg-white hover:text-[var(--background-color)] py-3 px-8 rounded-full font-semibold transition duration-300 text-[12px] md:text-xl">
+              <button className="border border-white cursor-pointer text-black bg-white hover:text-[var(--background-color)] py-2 px-5 rounded-full font-semibold transition duration-300 text-[12px] md:text-xl">
                 Learn More
               </button>
             </div>

@@ -110,11 +110,13 @@ function Productdetails() {
           >
             Add to Cart
           </button>
-          <button
-            className="bg-[var(--primary-color)] cursor-pointer text-white px-6 py-3 rounded-md hover:bg-orange-600"
-          >
-            Buy now
-          </button>
+          <Link to={`/orderInfo`}>
+            <button
+              className="bg-[var(--primary-color)] cursor-pointer text-white px-6 py-3 rounded-md hover:bg-orange-600"
+            >
+              Buy Now
+            </button>
+          </Link>
         </div>
       </div>
     </div>
