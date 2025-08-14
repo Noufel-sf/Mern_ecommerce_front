@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FaStar } from 'react-icons/fa';
 import { useCart } from './CartContext';
+import { Link } from 'react-router-dom';
 
 function Productdetails() {
   const apiUrl = import.meta.env.VITE_API_URL; // Use the environment variable for API URL
